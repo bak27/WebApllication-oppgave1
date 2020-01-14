@@ -1,0 +1,279 @@
+﻿@model VY_kjøptogbillet.Models.TogBestilling
+
+
+<html>
+<head>
+
+    <title>JavaScript Form validation</title>
+    <link rel="stylesheet" href="~/Bestill.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>
+        // Defining a function to display error message
+        function printError(elemId, hintMsg) {
+            document.getElementById(elemId).innerHTML = hintMsg;
+        }
+
+        // Defining a function to validate form
+        function validateForm() {
+            // Retrieving the values of form elements
+            var mobil = document.contactForm.mobil.value;
+            var navn = document.contactForm.navn.value;
+            var kortnr = document.contactForm.kortnr.value;
+            var moned = document.contactForm.moned.value;
+            var year = document.contactForm.year.value;
+            var ccv = document.contactForm.ccv.value;
+
+
+
+            // Defining error variables with a default value
+            var mobilErr = navnErr = kortnrErr = monedErr = yearErr = ccvErr = true;
+            if (mobil == "") {
+                printError("mobilErr", "Vennligst skrive mobilnummer");
+            }
+            else {
+                var regex = /^[0-9]{8}$/;
+                if (regex.test(mobil) === false) {
+                    printError("mobilErr", "Mobilnummer må være tall og 8 siffer");
+                } else {
+                    printError("mobilErr", "");
+                    mobilErr = false;
+                }
+            }
+
+
+            // Validate name
+            if (navn == "") {
+                printError("navnErr", "Vennligst skrive Kortholders Navn");
+            } else {
+                var regex = /^[a-zA-ZæøåÆØÅ .\-]{5,20}$/;
+                if (regex.test(navn) === false) {
+                    printError("navnErr", "Vennligst skrive Kortholders Navn");
+                } else {
+                    printError("navnErr", "");
+                    navnErr = false;
+                }
+            }
+
+
+            if (kortnr == "") {
+                printError("kortnrErr", "Vennligst skrive Kordnumber");
+            } else {
+                var regex = /^[0-9]{12}$/;
+                if (regex.test(kortnr) === false) {
+                    printError("kortnrErr", "Kordnumber må være tall og 12 siffer");
+                } else {
+                    printError("kortnrErr", "");
+                    kortnrErr = false;
+                }
+            }
+
+            if (moned == "") {
+                printError("monedErr", "Vennligst skrive Måned");
+            } else {
+                var regex = /^\d{1}|[1-9]\d{1}$/;
+                if (regex.test(moned) === false) {
+                    printError("monedErr", "Utløpsmåned skal være tall og 2 siffer");
+                } else {
+                    printError("monedErr", "");
+                    monedErr = false;
+                }
+            }
+
+
+            if (year == "") {
+                printError("yearErr", "Vennligst skrive Utløpsår");
+            } else {
+                var regex = /^[0-9]{4}$/;
+                if (regex.test(year) === false) {
+                    printError("yearErr", "Utløpsår skal være tall og 2 siffer");
+                } else {
+                    printError("yearErr", "");
+                    yearErr = false;
+                }
+            }
+
+
+            if (ccv == "") {
+                printError("ccvErr", "Vennligst skrive CCV-Kode");
+            } else {
+                var regex = /^[0-9]{3}$/;
+                if (regex.test(ccv) === false) {
+                    printError("ccvErr", "CCV-Kode skal være tall og 3 siffer");
+                } else {
+                    printError("ccvErr", "");
+                    ccvErr = false;
+                }
+            }
+
+
+
+            // Prevent the form from being submitted if there are any errors
+            if ((mobilErr || navnErr || kortnrErr || monedErr || yearErr || ccvErr) == true) {
+                return false;
+            }
+
+        };
+    </script>
+</head>
+<body>
+    <div id="booking" class="section">
+        <div class="section-center">
+            <div class="container">
+
+                <div class="booking-form">
+                    <div class="form-header">
+                        <h1>Betaling</h1>
+                    </div>
+                    <form name="contactForm" onsubmit="return validateForm()" action="/TogBestilling/HentBestilling" method="post" class="col-lg-6">
+
+
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <i class="fa fa-mobile" style="font-size:24px"></i>
+                                    <label for="MobilNumber">
+                                        Mobilnummer
+                                    </label>
+                                    <div class="input-group">
+                                        <input type="text" name="mobil" class="form-control" placeholder="951111111" />
+                                        <div style='color:red' class="error" id="mobilErr"></div>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <i class="fa fa-user" style="font-size:18px"></i>
+                                    <label for="KortholdersNavn">
+                                        Kortholders Navn
+                                    </label>
+                                    <div class="input-group">
+                                        <input type="text" name="navn" class="form-control" placeholder="Karl Hansen" />
+                                        <div style='color:red' class="error" id="navnErr"></div>
+
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <i class="fa fa-credit-card-alt"></i>
+                                    <label for="KortNummer">
+                                        Kort Nummer
+                                    </label>
+                                    <input type="text" name="kortnr" class="form-control" placeholder="1111222233334444" />
+                                    <div style='color:red' class="error" id="kortnrErr"></div>
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div class="form-group">
+
+                                    <label>
+                                        Utløpsmåned
+                                    </label>
+                                    <input type="number" name="moned" class="form-control" min="01" max="12" placeholder="01" />
+                                    <div style='color:red' class="error" id="monedErr"></div>
+
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label>
+                                        Utløpsår
+                                    </label>
+                                    <input type="number" name="year" class="form-control" min="2019" max="2025" placeholder="2021" />
+                                    <div style='color:red' class="error" id="yearErr"></div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div class="form-group">
+
+                                    <label for="cvCode">
+                                        CVV
+                                    </label>
+                                    <input type="text" name="ccv" class="form-control" placeholder="123" />
+                                    <div style='color:red' class="error" id="ccvErr"></div>
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="form-btn">
+                                        <input type="submit" name="kjøp" value="Bekreft Kjøpet" class="btn btn-success" />
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <div class="form-btn">
+
+                                        <input class="btn btn-danger " type="reset">
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                    </form>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</body>
+</html>
+

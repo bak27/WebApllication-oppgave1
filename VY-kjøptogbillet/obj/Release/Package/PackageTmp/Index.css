@@ -1,0 +1,93 @@
+﻿body {
+    background-image: url('Images/train.png');
+   
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    background-position: inherit;
+    display: flex;
+}
+
+
+.booking-form .form-header h1 {
+            font-size: 40px;
+            text-transform: uppercase;
+            font-weight:500;
+            color: #ffc001;
+            
+        
+ }
+
+.booking-form > form {
+    background-color: #e6e6e6;
+    padding-top: 10px;
+    border-radius: 3px;
+}
+
+
+    .booking-form .form-control {
+        background-color: #f5f5f5;
+        border-radius: 3px;
+      
+        font-weight: 400;
+      
+    }
+#turAvg {
+    background-color: #f5f5f5;
+    border-radius: 3px;
+    font-weight: 400;
+    
+    
+    margin-top:5px;
+    display:none;
+}
+
+#retAvg {
+    background-color: #f5f5f5;
+    border-radius: 3px;
+    font-weight: 400;
+    margin-top: 5px;
+    display: none;
+}
+
+.form-radio {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    display: inline-block;
+    position: relative;
+    background-color: #a0b89e;
+    color: #fff;
+    top: 5px;
+    height: 25px;
+    width: 25px;
+    border: 0;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-right: 10px;
+    outline: none;
+}
+
+    .form-radio:checked::before {
+        position: absolute;
+        font: 13px/1 'Open Sans', sans-serif;
+        left: 9px;
+        top: 5px;
+        content: '\02143';
+        transform: rotate(40deg);
+    }
+
+    .form-radio:hover {
+        background-color: #72966f;
+    }
+
+    .form-radio:checked {
+        background-color: #668264;
+    }
+
+label {
+    font: 15px/1.7 'Open Sans', sans-serif;
+    color: #000;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    cursor: pointer;
+} 
+    

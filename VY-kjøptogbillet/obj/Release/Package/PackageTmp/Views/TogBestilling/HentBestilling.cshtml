@@ -1,0 +1,55 @@
+﻿@model List<VY_kjøptogbillet.Models.TogBestilling>
+
+<body>
+    <div>
+        <h3>Billett Utskrift</h3> 
+                <div id="utskrift">
+                    @foreach (var Bestilling in Model)
+                    {
+                        if (@Bestilling.AvgangogPrice != null && @Bestilling.ReturAvgangogPrice == null)
+                        {
+                            <p>Envei:@Bestilling.Fra - @Bestilling.Til </p><br />
+                        }
+                        if (@Bestilling.AvgangogPrice != null && @Bestilling.ReturAvgangogPrice != null)
+                        {
+                            <p>Tur:@Bestilling.Fra - @Bestilling.Til </p><br />
+                            <p>Retur:@Bestilling.Til - @Bestilling.Fra </p><br />
+
+                        }
+
+                        if (Bestilling.Voksen != 0)
+                        {
+                            <p>Voksen:@Bestilling.Voksen</p>
+                        }
+                        if (Bestilling.Barn != 0)
+                        {
+                            <p>Barn:@Bestilling.Barn</p>
+                        }
+
+                        if (Bestilling.Student != 0)
+                        {
+                            <p>Student:@Bestilling.Student</p>
+                        }
+                        if (Bestilling.Honnør != 0)
+                        {
+                            <p>Honnør:@Bestilling.Honnør</p>
+                        }
+                        <p>Utreisedato:@Bestilling.Utreisedato  </p><br />
+
+                        if (@Bestilling.Returdato != null)
+                        {
+                            <p>Returdato:@Bestilling.Returdato</p><br />
+                        }
+                        <p>Avgang,og Price:@Bestilling.AvgangogPrice  </p>
+                        if (@Bestilling.ReturAvgangogPrice != null)
+                        {
+                            <p>ReturAvgang,og Price:@Bestilling.ReturAvgangogPrice  </p>
+                        }
+
+
+                    }
+                </div>
+        <h3> God tur</h3>
+        <a href="/TogBestilling/Index" class="btn btn-primary">Tilbake Til Bestilling</a>
+    </div>
+</body>
